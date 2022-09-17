@@ -1,0 +1,67 @@
+<div class="container mt-5 mb-5">
+  <div class="row row-cols-10 justify-content-center g-5">
+    <fieldset>
+        <legend>Cadastro Contatos</legend>
+        <form onsubmit="salvarDadosJson()">
+            <label for="Nome">Nome:</label>
+            <input type="text" class="form-control" id="nome" required>
+            <label for="Telefone">Telefone:</label>
+            <input type="tel" class="form-control" id="telefone" required>
+            <label for="Email">Email:</label>
+            <input type="email" class="form-control" id="email" required>
+            <label for="DataNascimento">Data de Nascimento:</label>
+            <input type="date" class="form-control" id="datanascimento" required>
+            <details>
+                <summary>Informações Adicionais</summary><br>
+                <label for="sexo">Sexo:</label>
+                <br><input type="radio" id="masc" name="sexo">
+                <label for="masc">Masculino</label>
+                <br><input type="radio" id="femin" name="sexo">
+                <label for="femin">Feminino</label>
+                <br><br><label for="origem-contato">Origem do Contato: </label>
+                <select name="origem-contato" id="origem-contato" class="form-control">
+                    <option value="default" selected>Selecione</option>
+                    <option value="riosul">Rio do Sul</option>
+                    <option value="riosul">Curitibanos</option>
+                    <option value="riosul">Laurentino</option>
+                    <option value="riosul">Ituporanga</option>
+                </select><br>
+                <label for="grau-parentesco">Parente: </label>
+                <input type="checkbox">Sim/Não
+                <br><br><label for="imagem">Selecione uma Foto para o Contato:</label><br><br>
+                <input type="file" class="form-control">
+                <img src="data:image/png;base64,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">
+                <p>Imagem Exemplo</p>
+                <details>
+                    <summary>Tecnologias Utilizadas</summary>
+                    <ol>
+                      <li>HMTL</li> 
+                      <li>CSS</li> 
+                      <li>FrameWork Bootstrap</li> 
+                    </ol>
+                </details>
+            </details><br>
+            <script>
+              function salvarDadosJson(){
+
+                const oDadosCampos = {
+                  sNome           : $('#nome').val().trim(),
+                  sTelefone       : $('#telefone').val().trim(),
+                  sEmail          : $('#email').val().trim(),
+                  sDataNascimento : $('#datanascimento').val().trim()  
+                }
+                
+                const JsonDadosCampos = JSON.stringify(oDadosCampos);
+
+                localStorage.setItem("dadosCampos", JsonDadosCampos);
+
+                const localJson = localStorage.getItem('dadosCampos');
+
+                jQuery.post("index.php", {dadosCampos: localJson}, function(sData){alert(sData)});
+              }
+            </script>
+            <input type="submit" value="Enviar" class="btn btn-primary" id="confirmar">
+        </form>
+    </fieldset>
+  </div>
+</div>
