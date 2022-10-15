@@ -1,7 +1,7 @@
 <div class="container mt-5 mb-5">
   <div class="row row-cols-10 justify-content-center g-5">
     <fieldset>
-        <legend>Cadastro Contatos</legend>
+        <legend>{{registerLegend}}</legend>
         <form onsubmit="salvarDadosJson()">
             <label for="Nome">Nome:</label>
             <input type="text" class="form-control" id="nome" required>
@@ -42,9 +42,56 @@
                 </details>
             </details><br>
             <script>
+
+              var sAcao = getParametroGET('act');
+              var iContato;
+
+
+              $(document).ready(function (){  
+                
+                if(isAcaoAlterar){
+                  carregaDadosContato(getCampos());
+                }
+
+              });
+
+              function getCampos(){
+                return {
+                  oNome            : $('#nome'),
+                  oTelefone        : $('#telefone'),
+                  oEmail           : $('#email'),
+                  oDataNascimento  : $('#datanascimento')
+                }
+              }
+
+              function carregaDadosContato(oCampos){
+                
+                const sContato = atob(getParametroGET('contato'));
+
+                const oContato = JSON.parse(sContato);
+
+                iContato = oContato.iContato;
+
+                oCampos.oNome.val(oContato.sNome);
+                oCampos.oTelefone.val(oContato.sTelefone);
+                oCampos.oEmail.val(oContato.sEmail);
+                oCampos.oDataNascimento.val(oContato.sDataNascimento);
+              }
+
+              function getParametroGET(sParam){
+
+                const sUrl = window.location.href;
+
+                const oUrl = new URL(sUrl);
+
+                return oUrl.searchParams.get(sParam);
+              }
+
               function salvarDadosJson(){
 
                 const oDadosCampos = {
+                  sAcao           : isAcaoAlterar() ? sAcao    : null, 
+                  iContato        : isAcaoAlterar() ? iContato : null,
                   sNome           : $('#nome').val().trim(),
                   sTelefone       : $('#telefone').val().trim(),
                   sEmail          : $('#email').val().trim(),
@@ -57,8 +104,14 @@
 
                 const localJson = localStorage.getItem('dadosCampos');
 
-                jQuery.post("index.php", {dadosCampos: localJson}, function(sData){alert(sData)});
+                jQuery.post("index.php", {oPOST: localJson}, (sData) => {console.log(sData);});
+              
               }
+              
+              function isAcaoAlterar(){
+                return sAcao == 'update';
+              }
+
             </script>
             <input type="submit" value="Enviar" class="btn btn-primary" id="confirmar">
         </form>

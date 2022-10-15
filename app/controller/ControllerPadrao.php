@@ -2,16 +2,14 @@
 
 namespace App\Controller;
 
-use App\View\ViewPage,
-    App\View\ViewHeader,
-    App\View\ViewFooter;
+use App\View\{ViewPage, ViewHeader, ViewFooter};
 
 abstract class ControllerPadrao {
 
     public $headerVars = [];
     public $footerVars = [];
     protected $Session;
-
+    
     
     public function render() {
         
@@ -29,11 +27,11 @@ abstract class ControllerPadrao {
         return $this->processPage();
     }
     
-    private function getModel() {
+    protected function getModel() {
         
     }
 
-    private function setModel() {
+    protected function setModel($oDados) {
         
     }
 
