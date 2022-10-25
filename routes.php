@@ -5,8 +5,7 @@
  * @param string $sPage
  * @return string
  */
-function render($sPage)
-{
+function render($sPage){
     switch ($sPage) {
         case 'home':
             return (new App\Controller\ControllerHome)->render();

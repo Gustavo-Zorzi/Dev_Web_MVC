@@ -1,5 +1,49 @@
-<div class="container">
-    <div class="row row-cols-auto justify-content-center g-5">
+<div class="container" style="padding-bottom: 50px;">
+    <div class="input-group rounded">
+        <input id='pesquisa' type="search" class="form-control rounded" placeholder="Procurar Contatos" aria-label="Search" aria-describedby="search-addon" style="max-width: 350px;"/>
+        <span class="input-group-text border-0" id="search-addon" onclick="buscaContatos()" style="cursor: pointer">
+          <i class="fas fa-search"></i>
+        </span>
+      </div>
+</div>
+<div class="container .pt-5">
+    <div class="table">
         {{homeContent}}
     </div>
 </div>
+<script>
+
+    function getCampos(){
+        return {
+            oPesquisa : $('#pesquisa')    
+        }
+    }
+
+    function doAjaxBuscaContato(sPesquisa){
+
+        const oChave = {
+            sPesquisa : sPesquisa
+        }
+
+        $.ajax({
+            url   : './ajax.php',
+            type  : 'POST',
+            data  : {'chave' : JSON.stringify(oChave)}
+        }).done((retorno) => {
+            console.log(retorno);
+        });     
+    }
+
+    async function buscaContatos(){
+
+        const sPesquisa = getCampos().oPesquisa.val().trim();
+
+        if(!sPesquisa){
+            alert('Informe um valor para pesquisar');
+            return;
+        }
+
+        await doAjaxBuscaContato(sPesquisa);
+    }
+
+</script>

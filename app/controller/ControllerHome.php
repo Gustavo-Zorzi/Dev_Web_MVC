@@ -33,6 +33,11 @@ class ControllerHome extends ControllerPadrao {
     }
 
     function processDelete(){
+
+        if(!Principal::existeContato(self::getContato())){
+            return $this->processPage();
+        }
+
         $oDadosContato = Principal::getDadosJson(self::getContato());
         $oContatoExcluir = $this->setModel($oDadosContato);
         $oContatoExcluir->destroy();

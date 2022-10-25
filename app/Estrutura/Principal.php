@@ -8,7 +8,7 @@ class Principal{
 
     public static function salvaJson($xDadosNovos, $sAcao = null){
 
-        if($sAcao == self::UPDATE){
+        if($sAcao === self::UPDATE){
             self::atualizarJSON($xDadosNovos);
             return;
         }
@@ -78,7 +78,7 @@ class Principal{
         $sDataNascimento = self::tratarDataNascimento($oDados->sDataNascimento);
 
         return (object) [
-            'iContato'          => self::getProximoCodigoContato(),    
+            'iContato'          => $oDados->iContato,    
             'sNome'             => $oDados->sNome,
             'sTelefone'         => $oDados->sTelefone,
             'sEmail'            => $oDados->sEmail,
@@ -135,8 +135,21 @@ class Principal{
                 }
             }
         }
-
+        
         return $aDadosJson;
+    }
+    
+    public static function existeContato($iContato){
+        
+        $aDadosAtuais = self::getDadosJson(null, true);
+
+        if(!$aDadosAtuais){
+            return false;
+        }
+
+        $oDadosAtuais = self::getDadosJson($iContato);
+
+        return $oDadosAtuais->iContato === $iContato;
     }
 
     public static function limpaArquivo(){

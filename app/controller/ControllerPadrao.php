@@ -76,10 +76,10 @@ abstract class ControllerPadrao {
         $sFooter = $this->getFooter($this->footerVars);
 
         return ViewPage::render([
-            'title' => $sTitle,
-            'header' => $sHeader,
+            'title'   => $sTitle,
+            'header'  => $sHeader,
             'content' => $sContent,
-            'footer' => $sFooter
+            'footer'  => $sFooter
         ]);
     }
 

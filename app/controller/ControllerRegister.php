@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use App\Controller\ControllerPadrao,
-    App\View\ViewRegister;
-use App\Estrutura\Principal;
+    App\View\ViewRegister,
+    App\Estrutura\Principal;
 
 class ControllerRegister extends ControllerPadrao {
 
